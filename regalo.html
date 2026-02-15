@@ -2,108 +2,94 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Regalo Digital</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
+<title>Un Regalo Para Ti</title>
 
+<style>
 body {
+  margin: 0;
   height: 100vh;
-  background: linear-gradient(135deg, #1e1e2f, #2b5876, #4e4376);
   overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
 }
 
-/* PARTICULAS */
-canvas {
+/* FONDO CORAZONES */
+.corazon {
   position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
+  font-size: 20px;
+  animation: flotar 6s linear infinite;
+  opacity: 0.7;
 }
 
+@keyframes flotar {
+  from { transform: translateY(100vh) scale(0.5); }
+  to { transform: translateY(-10vh) scale(1.2); }
+}
+
+/* TARJETA */
 .card {
+  background: rgba(255,255,255,0.95);
+  width: 340px;
+  padding: 25px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  animation: subir 4s infinite ease-in-out;
   position: relative;
   z-index: 2;
-  width: 380px;
-  padding: 30px;
-  border-radius: 20px;
-  backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.2);
-  text-align: center;
-  box-shadow: 0 0 40px rgba(0,0,0,0.5);
-  animation: float 4s ease-in-out infinite;
 }
 
-@keyframes float {
-  0% { transform: translateY(0px);}
-  50% { transform: translateY(-15px);}
-  100% { transform: translateY(0px);}
+@keyframes subir {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
 }
 
 .avatar {
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  border: 4px solid white;
-  margin-bottom: 15px;
   object-fit: cover;
-  box-shadow: 0 0 20px rgba(255,255,255,0.5);
-  animation: glow 2s infinite alternate;
-}
-
-@keyframes glow {
-  from { box-shadow: 0 0 10px white;}
-  to { box-shadow: 0 0 25px #00f2ff;}
+  border: 4px solid #ff6f91;
+  box-shadow: 0 0 15px #ff6f91;
 }
 
 h1 {
-  font-size: 26px;
-  margin-bottom: 10px;
+  color: #ff6f91;
+  margin: 10px 0;
 }
 
 p {
-  font-size: 15px;
-  opacity: 0.9;
-  margin-bottom: 20px;
+  color: #555;
 }
 
 button {
-  background: linear-gradient(45deg,#ff00cc,#3333ff);
-  border: none;
-  padding: 12px 25px;
-  border-radius: 30px;
+  background: linear-gradient(45deg,#ff6f91,#ff9671);
   color: white;
-  font-weight: bold;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 25px;
   cursor: pointer;
+  font-size: 16px;
   transition: 0.3s;
 }
 
 button:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 20px #fff;
 }
 
-.hidden {
-  display: none;
-}
-
-.message {
+.mensaje {
   margin-top: 15px;
-  font-size: 16px;
-  animation: fadeIn 1s ease forwards;
+  display: none;
+  font-size: 14px;
+  color: #444;
+  animation: aparecer 1s forwards;
 }
 
-@keyframes fadeIn {
+@keyframes aparecer {
   from {opacity: 0;}
   to {opacity: 1;}
 }
@@ -112,75 +98,47 @@ button:hover {
 
 <body>
 
-<canvas id="particles"></canvas>
-
 <div class="card">
-  <!-- CAMBIAR IMAGEN -->
-  <img src="C:\Users\MOISES\Documents\Nueva carpeta" class="avatar">
 
-  <!-- CAMBIAR NOMBRE -->
-  <h1>Para Mi Gran Amiga Maria</h1>
+  <!-- FOTO -->
+  <img src="foto.png" class="avatar">
 
-  <!-- CAMBIAR MENSAJE -->
-  <p>Eres una persona increíble y mereces lo mejor del mundo.</p>
+  <!-- NOMBRE -->
+  <h1>Para Ti</h1>
 
-  <button onclick="showMessage()">Abrir Regalo</button>
+  <p>Este pequeño detalle es solo para recordarte lo especial que eres 💐</p>
 
-  <div id="giftMessage" class="message hidden">
-    🎉 ¡Gracias por existir! Nunca olvides lo importante que eres 🎉
+  <button onclick="mostrar()">Abrir Sorpresa</button>
+
+  <div id="msg" class="mensaje">
+    💖 Gracias por existir.  
+    Eres una persona que ilumina los días de quienes te rodean,  
+    alguien con un corazón enorme y una energía que contagia alegría.  
+    Nunca dudes de tu valor ni de lo importante que eres.  
+    Ojalá este pequeño regalo te saque una sonrisa,  
+    porque mereces momentos bonitos, tranquilidad y mucha felicidad.  
+    Que cada meta que tengas se cumpla y que siempre encuentres razones  
+    para reír, soñar y seguir brillando. 🌸✨
   </div>
+
 </div>
 
 <script>
-// BOTÓN
-function showMessage(){
-  document.getElementById("giftMessage").classList.remove("hidden");
+function mostrar() {
+  document.getElementById("msg").style.display = "block";
 }
 
-// PARTICULAS
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<150;i++){
-  particles.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    r: Math.random()*2,
-    d: Math.random()*1
-  });
+/* CREAR CORAZONES */
+const emojis = ["💖","🌸","💗","🌺","💞"];
+for (let i = 0; i < 25; i++) {
+  let e = document.createElement("div");
+  e.className = "corazon";
+  e.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left = Math.random() * 100 + "vw";
+  e.style.animationDuration = (4 + Math.random()*4) + "s";
+  e.style.fontSize = (16 + Math.random()*20) + "px";
+  document.body.appendChild(e);
 }
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="white";
-  ctx.beginPath();
-  for(let i=0;i<particles.length;i++){
-    let p=particles[i];
-    ctx.moveTo(p.x,p.y);
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
-  }
-  ctx.fill();
-  update();
-}
-
-let angle=0;
-function update(){
-  angle+=0.01;
-  for(let i=0;i<particles.length;i++){
-    let p=particles[i];
-    p.y+=Math.cos(angle+p.d)+1+p.r/2;
-    p.x+=Math.sin(angle)*2;
-    if(p.x>canvas.width||p.x<0||p.y>canvas.height){
-      particles[i]={x:Math.random()*canvas.width,y:0,r:p.r,d:p.d};
-    }
-  }
-}
-
-setInterval(draw,33);
 </script>
 
 </body>
